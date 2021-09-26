@@ -14,10 +14,13 @@ router.get('/',auth,saucesCtrl.getAllSauces );
 router.get('/:id',auth,saucesCtrl.getOneSauce );
   
 //modifier un article dans la base de donnés
-//router.put('/:id',auth,multer,)
+router.put('/:id',auth,multer,saucesCtrl.modifyOneSauce)
   
 //supprimer un article dans la base de donnés
 router.delete('/:id',auth,saucesCtrl.deleteOneSauce )
+
+//liker ou disliker une sauce
+router.post('/:id/like',auth,saucesCtrl.addLike)
 
 module.exports=router;
   

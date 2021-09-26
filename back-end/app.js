@@ -2,8 +2,10 @@ const express=require('express');
 const app=express();
 const mongoose = require('mongoose');
 const path=require('path');
+const cors=require('cors')
 require('dotenv/config')
 
+//Routers
 const sauceRoutes=require('./routes/sauce');
 const userRoutes=require('./routes/user');
 
@@ -17,12 +19,7 @@ mongoose.connect(process.env.DB_CONNECTION,
 
 
 //debloquer le cors pour qu'il accepte l'appel a l'api   
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-    next();
-});
+app.use(cors());
 
 //transformer le corps des requetes post en objet json   
 app.use(express.json());

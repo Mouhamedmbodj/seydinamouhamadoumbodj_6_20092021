@@ -88,8 +88,9 @@ exports.modifyOneSauce=async(req,res,next)=>{
 }
 
 //ajouter like ou dislike
-exports.addLike = (req, res, next) => {
+exports.addLike =(req, res, next) => {
     const sauceId=req.params.id;
+    
     //si like==0
     if(req.body.like==0){
         Sauce.findOne({_id:sauceId},(error , result)=>{
@@ -152,7 +153,6 @@ function likeZero(result,Id){
         }
     } 
 }
-
 
 //like==1
 function likeOne(result,Id){

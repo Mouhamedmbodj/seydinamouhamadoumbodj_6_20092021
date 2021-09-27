@@ -8,8 +8,8 @@ const Joi=require('@hapi/joi');
 //models de données attendu 
 //pour valider l'utilisateur
 const schema = Joi.object({
-    email: Joi.string() .min(6) .required() .email(),
-    password: Joi.string() .min(6) .required()
+    email: Joi.string().regex(new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$')).min(6).required().email(),
+    password: Joi.string().regex(new RegExp('^[a-zA-Z0-9]{8,32}$')).min(6).required()
 });
 
 //création d'un compte utilisateur

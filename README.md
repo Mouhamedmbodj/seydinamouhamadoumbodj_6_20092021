@@ -29,22 +29,22 @@ Use `Ctrl+C` in the terminal to stop the local server.
 ## Installation ##
 
 Here are the dependancies you need to install:
--"@hapi/joi": "^17.1.1",
--"bcrypt": "^5.0.1",
--"cors": "^2.8.5",
--"dotenv": "^10.0.0",
--"express": "^4.17.1",
--"jsonwebtoken": "^8.5.1",
--"mongoose": "^6.0.5",
--"mongoose-unique-validator": "^2.0.3",
--"multer": "^1.4.3",
--"nodemon": "^2.0.12"
+- "@hapi/joi": "^17.1.1",
+- "bcrypt": "^5.0.1",
+- "cors": "^2.8.5",
+- "dotenv": "^10.0.0",
+- "express": "^4.17.1",
+- "jsonwebtoken": "^8.5.1",
+- "mongoose": "^6.0.5",
+- "mongoose-unique-validator": "^2.0.3",
+- "multer": "^1.4.3",
+- "nodemon": "^2.0.12"
 
 ## Usage ##
--"in the back-end folder create an image folder".
--"in the back-end folder create an .env file".
--"in the .env file create a value DB_CONNECTION='your database mongo db'".
--"in your terminal run 'nodemon server'".
+- "in the back-end folder create an image folder".
+- "in the back-end folder create an .env file".
+- "in the .env file create a value DB_CONNECTION='your database mongo db'".
+- "in your terminal run 'nodemon server'".
 
 
 

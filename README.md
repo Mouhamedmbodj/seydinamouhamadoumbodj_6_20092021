@@ -38,10 +38,10 @@ Here are the dependancies you need to install:
 "nodemon": "^2.0.12"
 
 ## Usage ##
-in the back-end folder create an image folder
-in the back-end folder create an .env file
-in the .env file create a value DB_CONNECTION='your database mongo db'
-in your terminal run "nodemon server"
+"in the back-end folder create an image folder".
+"in the back-end folder create an .env file".
+"in the .env file create a value DB_CONNECTION='your database mongo db'".
+"in your terminal run 'nodemon server'".
 
 
 

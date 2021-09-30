@@ -8,8 +8,8 @@ const Joi=require('@hapi/joi');
 //models de données attendu 
 //pour valider l'utilisateur
 const schema = Joi.object({
-    email: Joi.string().regex(new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$')).min(6).required().email(),
-    password: Joi.string().regex(new RegExp('^[a-zA-Z0-9]{8,32}$')).min(6).required()
+    email: Joi.string().regex(new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$')).min(8).required().email(),
+    password: Joi.string().regex(new RegExp('^[a-zA-Z0-9]{8,32}$')).min(8).required()
 });
 
 //création d'un compte utilisateur
@@ -21,7 +21,7 @@ exports.signup=async (req , res ,next )=>{
     const hashedPassword= await bcrypt.hash(validation.value.password , salt);
     //verifier si l'email ou le mot de passe est correcte
     if(validation.error){
-        res.status(401).send(validation.error)
+        res.status(401).send({message:'email ou mot de passe invalide'});
     }else{
        //créer un nouveau utilisateur
        const user=new User({
@@ -33,26 +33,25 @@ exports.signup=async (req , res ,next )=>{
         try{
           const savedUser=await user.save();
           res.send(savedUser);
-          res.status(200).json({Message:'utilisateur créer!!'})
+          res.status(200).json({message:'Compte créer avec succés'})
         }
-        catch(error){
-           res.status(401).send(error)  
+        catch(error){ 
+          res.status(401).send({message:"Cet email existe déja"});  
         }
     } 
 }
-
 
 //connexion utilisateur
 exports.login=async (req , res , next)=>{
     User.findOne({ email: req.body.email })
       .then(user => {
         if (!user) {
-          return res.status(401).json({ error: 'Utilisateur non trouvé !' });
+          return res.status(401).json({error:'Utilisateur non trouvé ou Mot de passe incorrect!' });
         }
         bcrypt.compare(req.body.password, user.password)
           .then(valid => {
             if (!valid) {
-              return res.status(401).json({ error: 'Mot de passe incorrect !' });
+              return res.status(401).json({error:'Utilisateur non trouvé ou Mot de passe incorrect!'});
             }
             res.status(200).json({
               userId: user._id,

@@ -3,7 +3,7 @@ const app=express();
 const mongoose = require('mongoose');
 const path=require('path');
 const cors=require('cors')
-require('dotenv/config')
+require('dotenv/config');
 
 //Routers
 const sauceRoutes=require('./routes/sauce');

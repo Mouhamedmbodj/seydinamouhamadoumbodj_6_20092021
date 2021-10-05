@@ -1,10 +1,8 @@
 const Sauce=require('../models/sauce');
 const fs=require('fs');
-const crypto = require("crypto");
 
 //création de la sauce 
 exports.createSauce=async(req , res ,next)=>{
-    const id = crypto.randomBytes(16).toString("hex");
     //recuperer le corps de la requete
     const sauceObject =await JSON.parse(req.body.sauce);
     //supprimer l'id au cas ou il y'en a
@@ -21,7 +19,6 @@ exports.createSauce=async(req , res ,next)=>{
     //sauvegarder la sauce dans notre base de données
     try{
         const savedSauce=await sauce.save();
-        console.log(savedSauce)
         res.send(savedSauce);
         res.status(200).send({Message:'Sauce créer avec succée'})
     }catch(error){
@@ -110,7 +107,7 @@ exports.addLike =(req, res, next) => {
                 console.log(error)
             }else{
                likeOne(result,req.body.userId);
-               res.send({Message:'like ajouter'})
+               res.status(204).send({Message:'like ajouter'})
             }
         })
     }//verifier si like ==1
@@ -166,11 +163,23 @@ function likeOne(result,Id){
                result.dislikes-=1;
                saveResult(result);
             }
-        }
+        }    
     }
+    
+    if(result.usersLiked!=null){
+        for(users of result.usersLiked){
+            if(Id==users){
+               result.usersLiked.remove(Id);
+               result.likes-=1;
+               saveResult(result);
+            }
+        }    
+    }
+
     result.usersLiked.push(Id)
     result.likes+=1;
     saveResult(result);
+
 }
 /****** */
 
@@ -179,7 +188,7 @@ function dislikeOne(result,Id){
     //verifier si userId est dans le tableau des usersLiked
     //si oui le supprimer dans le tableau 
     //diminuer les likes
-    if(result.usersLiked!=null){
+    if(result.usersLiked !== null){
         for(users of result.usersLiked){
             if(Id==users){
                result.usersLiked.remove(Id);
@@ -188,6 +197,17 @@ function dislikeOne(result,Id){
             }
         }
     }
+
+    if(result.usersDisliked!=null){
+        for(users of result.usersDisliked){
+            if(Id==users){
+               result.usersDisliked.remove(Id);
+               result.dislikes-=1;
+               saveResult(result);
+            }
+        }    
+    }
+
     result.usersDisliked.push(Id)
     result.dislikes+=1;
     saveResult(result);

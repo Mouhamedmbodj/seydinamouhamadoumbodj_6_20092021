@@ -127,7 +127,7 @@ exports.addLike =(req, res, next) => {
     
     //si aucun like ou dislike n'est ajouter
     //ou req.body.like > 1
-     if(req.body.like == undefined || req.body.like > 1 ){
+     if(req.body.like == undefined || req.body.like > 1 || req.body.like < -1 ){
         res.status(404).send({Message:"aucun like ou dislike n'est trouvé"})
     }
     

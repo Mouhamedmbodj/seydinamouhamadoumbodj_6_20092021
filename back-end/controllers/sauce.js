@@ -124,6 +124,12 @@ exports.addLike =(req, res, next) => {
             }
         })
     }//verifier si like ==-1
+    
+    //si aucun like ou dislike n'est ajouter
+     if(req.body.like == undefined ){
+        res.status(404).send({Message:"aucun like ou dislike n'est trouvé"})
+    }
+    
 };
 
 

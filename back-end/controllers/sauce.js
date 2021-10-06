@@ -107,7 +107,7 @@ exports.addLike =(req, res, next) => {
                 console.log(error)
             }else{
                likeOne(result,req.body.userId);
-               res.status(204).send({Message:'like ajouter'})
+               res.send({Message:'like ajouter'})
             }
         })
     }//verifier si like ==1
@@ -173,12 +173,14 @@ function likeOne(result,Id){
         }    
     }
     
+    
     if(result.usersLiked!=null){
         for(users of result.usersLiked){
             if(Id==users){
                result.usersLiked.remove(Id);
                result.likes-=1;
                saveResult(result);
+               res.send({error:"aucun like ou dislike n'est trouvé"}) 
             }
         }    
     }
@@ -211,6 +213,7 @@ function dislikeOne(result,Id){
                result.usersDisliked.remove(Id);
                result.dislikes-=1;
                saveResult(result);
+               res.send({error:"aucun like ou dislike n'est trouvé"})
             }
         }    
     }

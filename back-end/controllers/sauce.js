@@ -180,7 +180,7 @@ function likeOne(result,Id){
                result.usersLiked.remove(Id);
                result.likes-=1;
                saveResult(result);
-               res.send({error:"aucun like ou dislike n'est trouvé"}) 
+               res.send({error:"aucun like ou dislike n'est trouver"}) 
             }
         }    
     }
@@ -213,7 +213,7 @@ function dislikeOne(result,Id){
                result.usersDisliked.remove(Id);
                result.dislikes-=1;
                saveResult(result);
-               res.send({error:"aucun like ou dislike n'est trouvé"})
+               res.send({error:"aucun like ou dislike n'est trouver"})
             }
         }    
     }

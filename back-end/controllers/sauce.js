@@ -106,7 +106,7 @@ exports.addLike =(req, res, next) => {
             if(error){
                 console.log(error)
             }else{
-               likeOne(result,req.body.userId);
+               likeOne(result,req.body.userId,res);
                res.send({Message:'like ajouter'})
             }
         })
@@ -119,7 +119,7 @@ exports.addLike =(req, res, next) => {
             if(error){
                 console.log(error)
             }else{
-               dislikeOne(result,req.body.userId)
+               dislikeOne(result,req.body.userId,res)
                res.send({Message:'dislike ajouter'})
             }
         })
@@ -159,7 +159,7 @@ function likeZero(result,Id){
 }
 
 //like==1
-function likeOne(result,Id){
+function likeOne(result,Id,res){
     //verifier si userId est dans le tableau des usersDisliked
     //si oui le supprimer dans le tableau 
     //diminuer les dislikes
@@ -193,7 +193,7 @@ function likeOne(result,Id){
 /****** */
 
 //like==-1
-function dislikeOne(result,Id){
+function dislikeOne(result,Id,res){
     //verifier si userId est dans le tableau des usersLiked
     //si oui le supprimer dans le tableau 
     //diminuer les likes
